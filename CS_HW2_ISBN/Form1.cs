@@ -31,12 +31,12 @@ namespace CS_HW2_ISBN
         private const string Isbn13LabelString = "ISBN-13";
 
         /// <summary>
-        /// Isbn conversion prefix. (Must remain "978")
+        /// Isbn conversion prefix 1.
         /// </summary>
-        private const string UpConvertString = "978";
+        private const string NineSevenEight = "978";
 
         /// <summary>
-        /// Isbn conversion prefix. (Must remain "979")
+        /// Isbn conversion prefix 2. 
         /// </summary>
         private const string NineSevenNine = "979";
 
@@ -179,8 +179,9 @@ namespace CS_HW2_ISBN
         {
             if (this.SelectionComboBox.SelectedItem.ToString() == Isbn10LabelString)
             {
-                IsbnToValidate = UpConvertString + IsbnToValidate;
+                IsbnToValidate = NineSevenEight + IsbnToValidate;
             }
+            else {/*doNothing()*/} //No other cases to handle
 
             int[] IsbnArray = new int[IsbnToValidate.Length];
             int count = 0;
@@ -192,38 +193,54 @@ namespace CS_HW2_ISBN
             }
 
             var IsbnCheckDigit = 0;
-            var PrefixIsValid = IsbnToValidate.StartsWith(UpConvertString) || IsbnToValidate.StartsWith(NineSevenNine);
+            var PrefixIsValid = IsbnToValidate.StartsWith(NineSevenEight) || IsbnToValidate.StartsWith(NineSevenNine);
 
-            if (!PrefixIsValid)
-            {
-                DisplayInvalidDataMessage(SelectionComboBox.SelectedItem.ToString());
-            }
+            //if (!PrefixIsValid)
+            //{
+            //    DisplayInvalidDataMessage(SelectionComboBox.SelectedItem.ToString());
+            //}
 
-            if (this.SelectionComboBox.SelectedItem.ToString() == Isbn10LabelString && IsbnArray.Length > 0 && PrefixIsValid)
+            if (this.SelectionComboBox.SelectedItem.ToString() == Isbn10LabelString && 
+                IsbnArray.Length > NineSevenEight.Length && PrefixIsValid)
             {
-                /*IsbnCheckDigit = 11 - ((IsbnArray[0] * 10) + (IsbnArray[1] * 9) + (IsbnArray[2] * 8) + (IsbnArray[3] * 7) +
+                try
+                {
+                    /*IsbnCheckDigit = 11 - ((IsbnArray[0] * 10) + (IsbnArray[1] * 9) + (IsbnArray[2] * 8) + (IsbnArray[3] * 7) +
                                         (IsbnArray[4] * 6) + (IsbnArray[5] * 5) + (IsbnArray[6] * 4) + (IsbnArray[7] * 3) + 
                                           (IsbnArray[8] * 2) + (IsbnArray[9] * 1) % 11);*/
 
-
-
-                IsbnCheckDigit =  10 - (IsbnArray[0] + (3 * IsbnArray[1]) + IsbnArray[2] + (3 * IsbnArray[3]) +
+                    IsbnCheckDigit = 10 - (IsbnArray[0] + (3 * IsbnArray[1]) + IsbnArray[2] + (3 * IsbnArray[3]) +
                                            IsbnArray[4] + (3 * IsbnArray[5]) + IsbnArray[6] + (3 * IsbnArray[7]) +
-                                           IsbnArray[8] + (3 * IsbnArray[9]) + IsbnArray[10] + (3 * IsbnArray[11])) % 10;
+                                           IsbnArray[8] + (3 * IsbnArray[9]) + IsbnArray[10] +
+                                           (3 * IsbnArray[11])) % 10;
 
-                if (IsbnArray[12] == IsbnCheckDigit)
-                {
-                    FinalIsbn = string.Join("", IsbnArray);
-                    return true;
+                    if (IsbnArray[12] == IsbnCheckDigit)
+                    {
+                        /*if (IsbnCheckDigit == 10)
+                        {
+                            IsbnArray[12] = 'X';
+                        }*/
+                        FinalIsbn = string.Join("", IsbnArray);
+                        return true;
+                    }
+                    else
+                    {
+                        /*if (IsbnCheckDigit == 10)
+                        {
+                            IsbnArray[12] = 'X';
+                        }*/
+                        IsbnArray[12] = IsbnCheckDigit;
+                        FinalIsbn = string.Join("", IsbnArray);
+                        return false;
+                    }
                 }
-                else
+                catch (Exception Ex)
                 {
-                    IsbnArray[12] = IsbnCheckDigit;
-                    FinalIsbn = string.Join("", IsbnArray);
-                    return false;
+                    DisplayInvalidDataMessage(SelectionComboBox.SelectedItem.ToString());
                 }
             }
-            else if (this.SelectionComboBox.SelectedItem.ToString() == Isbn13LabelString && IsbnArray.Length > 0 && PrefixIsValid)
+            else if (this.SelectionComboBox.SelectedItem.ToString() == Isbn13LabelString && 
+                     IsbnArray.Length > NineSevenEight.Length && PrefixIsValid)
             {
                 try
                 {
@@ -231,7 +248,6 @@ namespace CS_HW2_ISBN
                                            IsbnArray[4] + (3 * IsbnArray[5]) + IsbnArray[6] + (3 * IsbnArray[7]) +
                                            IsbnArray[8] + (3 * IsbnArray[9]) + IsbnArray[10] +
                                            (3 * IsbnArray[11])) % 10;
-                
 
                     if (IsbnArray[12] == IsbnCheckDigit)
                     {
@@ -248,16 +264,17 @@ namespace CS_HW2_ISBN
                 catch (Exception Ex)
                 {
                     FinalIsbn = string.Join("", IsbnArray);
-                    DisplayInvalidDataMessage(SelectionComboBox.SelectedItem.ToString());
                     return false;
                 }
-
             }
             else
             {
                 FinalIsbn = "";
+                DisplayInvalidDataMessage(SelectionComboBox.SelectedItem.ToString());
                 return false;
             }
+            FinalIsbn = "";
+            return false;
         }
 //END OF FIX ME--------------------------------------------------------------------------------------------------------
 
@@ -268,11 +285,12 @@ namespace CS_HW2_ISBN
         private void DisplayInvalidDataMessage(string IsbnFormat)
         {
             MessageBox.Show("Input was invalid!\n" +
-                            "1. Verify that the proper ISBN format is selected.\n" +
-                            "2. Enter the complete ISBN [13 digits].\n" +
-                            "3. Check ISBN-13 begins with " + UpConvertString + " or " + NineSevenNine + ".\n" +
-                            "4. Click 'Validate ISBN'.", "Error",
-                MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            "1. Verify proper ISBN format:\n" +
+                            "       [ISBN-10/ISBN-13]\n" +
+                            "2. Enter the complete ISBN:\n" +
+                            "       [IBSN-10 = 13 digits, ISBN-13 = 10 digits]\n" +
+                            "3. ISBN-13 must begin with '" + NineSevenEight + "' or '" + NineSevenNine + ".", 
+                "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             SubmittedIsbnTextBox.Clear();
             this.Isbn10MaskedTextBox.Clear();
             this.Isbn13MaskedTextBox.Clear();
