@@ -36,17 +36,19 @@
             this.ExitButton = new System.Windows.Forms.Button();
             this.ValidLabel = new System.Windows.Forms.Label();
             this.InvalidLabel = new System.Windows.Forms.Label();
-            this.OutputTextBox = new System.Windows.Forms.TextBox();
+            this.OutputTextBox2 = new System.Windows.Forms.TextBox();
             this.ClearFormButton = new System.Windows.Forms.Button();
             this.SubmittedIsbnTextBox = new System.Windows.Forms.TextBox();
             this.InputIsbnLabel = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
+            this.OutputTextBox1 = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // Isbn10MaskedTextBox
             // 
             this.Isbn10MaskedTextBox.BeepOnError = true;
-            this.Isbn10MaskedTextBox.Location = new System.Drawing.Point(88, 120);
+            this.Isbn10MaskedTextBox.Location = new System.Drawing.Point(115, 135);
             this.Isbn10MaskedTextBox.Mask = "0-00-000000-0";
             this.Isbn10MaskedTextBox.Name = "Isbn10MaskedTextBox";
             this.Isbn10MaskedTextBox.Size = new System.Drawing.Size(100, 20);
@@ -59,7 +61,7 @@
             // Isbn13MaskedTextBox
             // 
             this.Isbn13MaskedTextBox.BeepOnError = true;
-            this.Isbn13MaskedTextBox.Location = new System.Drawing.Point(88, 120);
+            this.Isbn13MaskedTextBox.Location = new System.Drawing.Point(115, 135);
             this.Isbn13MaskedTextBox.Mask = "000-0-00-000000-0";
             this.Isbn13MaskedTextBox.Name = "Isbn13MaskedTextBox";
             this.Isbn13MaskedTextBox.Size = new System.Drawing.Size(100, 20);
@@ -75,7 +77,7 @@
             this.SelectionComboBox.Items.AddRange(new object[] {
             "ISBN-13",
             "ISBN-10"});
-            this.SelectionComboBox.Location = new System.Drawing.Point(90, 25);
+            this.SelectionComboBox.Location = new System.Drawing.Point(115, 38);
             this.SelectionComboBox.Name = "SelectionComboBox";
             this.SelectionComboBox.Size = new System.Drawing.Size(100, 21);
             this.SelectionComboBox.TabIndex = 1;
@@ -84,7 +86,7 @@
             // SelectFormatLabel
             // 
             this.SelectFormatLabel.AutoSize = true;
-            this.SelectFormatLabel.Location = new System.Drawing.Point(103, 9);
+            this.SelectFormatLabel.Location = new System.Drawing.Point(129, 22);
             this.SelectFormatLabel.Name = "SelectFormatLabel";
             this.SelectFormatLabel.Size = new System.Drawing.Size(70, 13);
             this.SelectFormatLabel.TabIndex = 5;
@@ -92,7 +94,7 @@
             // 
             // ValidateIsbnButton
             // 
-            this.ValidateIsbnButton.Location = new System.Drawing.Point(88, 80);
+            this.ValidateIsbnButton.Location = new System.Drawing.Point(115, 93);
             this.ValidateIsbnButton.Name = "ValidateIsbnButton";
             this.ValidateIsbnButton.Size = new System.Drawing.Size(100, 23);
             this.ValidateIsbnButton.TabIndex = 2;
@@ -103,7 +105,7 @@
             // ExitButton
             // 
             this.ExitButton.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.ExitButton.Location = new System.Drawing.Point(3, 80);
+            this.ExitButton.Location = new System.Drawing.Point(20, 93);
             this.ExitButton.Name = "ExitButton";
             this.ExitButton.Size = new System.Drawing.Size(75, 23);
             this.ExitButton.TabIndex = 3;
@@ -118,7 +120,7 @@
             this.ValidLabel.BackColor = System.Drawing.SystemColors.Control;
             this.ValidLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ValidLabel.ForeColor = System.Drawing.Color.Green;
-            this.ValidLabel.Location = new System.Drawing.Point(26, 120);
+            this.ValidLabel.Location = new System.Drawing.Point(35, 136);
             this.ValidLabel.Name = "ValidLabel";
             this.ValidLabel.Size = new System.Drawing.Size(43, 15);
             this.ValidLabel.TabIndex = 6;
@@ -131,26 +133,26 @@
             this.InvalidLabel.BackColor = System.Drawing.SystemColors.Control;
             this.InvalidLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.InvalidLabel.ForeColor = System.Drawing.Color.Red;
-            this.InvalidLabel.Location = new System.Drawing.Point(16, 120);
+            this.InvalidLabel.Location = new System.Drawing.Point(25, 135);
             this.InvalidLabel.Name = "InvalidLabel";
             this.InvalidLabel.Size = new System.Drawing.Size(53, 15);
             this.InvalidLabel.TabIndex = 7;
             this.InvalidLabel.Text = "Invalid!";
             this.InvalidLabel.Visible = false;
             // 
-            // OutputTextBox
+            // OutputTextBox2
             // 
-            this.OutputTextBox.Enabled = false;
-            this.OutputTextBox.Location = new System.Drawing.Point(88, 190);
-            this.OutputTextBox.Name = "OutputTextBox";
-            this.OutputTextBox.ReadOnly = true;
-            this.OutputTextBox.Size = new System.Drawing.Size(100, 20);
-            this.OutputTextBox.TabIndex = 8;
-            this.OutputTextBox.TabStop = false;
+            this.OutputTextBox2.Enabled = false;
+            this.OutputTextBox2.Location = new System.Drawing.Point(115, 227);
+            this.OutputTextBox2.Name = "OutputTextBox2";
+            this.OutputTextBox2.ReadOnly = true;
+            this.OutputTextBox2.Size = new System.Drawing.Size(100, 20);
+            this.OutputTextBox2.TabIndex = 8;
+            this.OutputTextBox2.TabStop = false;
             // 
             // ClearFormButton
             // 
-            this.ClearFormButton.Location = new System.Drawing.Point(3, 25);
+            this.ClearFormButton.Location = new System.Drawing.Point(20, 38);
             this.ClearFormButton.Name = "ClearFormButton";
             this.ClearFormButton.Size = new System.Drawing.Size(75, 21);
             this.ClearFormButton.TabIndex = 3;
@@ -161,7 +163,7 @@
             // SubmittedIsbnTextBox
             // 
             this.SubmittedIsbnTextBox.Enabled = false;
-            this.SubmittedIsbnTextBox.Location = new System.Drawing.Point(88, 155);
+            this.SubmittedIsbnTextBox.Location = new System.Drawing.Point(115, 175);
             this.SubmittedIsbnTextBox.Name = "SubmittedIsbnTextBox";
             this.SubmittedIsbnTextBox.ReadOnly = true;
             this.SubmittedIsbnTextBox.Size = new System.Drawing.Size(100, 20);
@@ -170,7 +172,7 @@
             // InputIsbnLabel
             // 
             this.InputIsbnLabel.AutoSize = true;
-            this.InputIsbnLabel.Location = new System.Drawing.Point(-1, 158);
+            this.InputIsbnLabel.Location = new System.Drawing.Point(24, 178);
             this.InputIsbnLabel.Name = "InputIsbnLabel";
             this.InputIsbnLabel.Size = new System.Drawing.Size(85, 13);
             this.InputIsbnLabel.TabIndex = 10;
@@ -179,11 +181,30 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(0, 193);
+            this.label2.Location = new System.Drawing.Point(7, 230);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(84, 13);
+            this.label2.Size = new System.Drawing.Size(102, 13);
             this.label2.TabIndex = 11;
-            this.label2.Text = "Corrected ISBN:";
+            this.label2.Text = " Corrected ISBN-13:";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(7, 204);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(102, 13);
+            this.label1.TabIndex = 12;
+            this.label1.Text = " Corrected ISBN-10:";
+            // 
+            // OutputTextBox1
+            // 
+            this.OutputTextBox1.Enabled = false;
+            this.OutputTextBox1.Location = new System.Drawing.Point(115, 201);
+            this.OutputTextBox1.Name = "OutputTextBox1";
+            this.OutputTextBox1.ReadOnly = true;
+            this.OutputTextBox1.Size = new System.Drawing.Size(100, 20);
+            this.OutputTextBox1.TabIndex = 13;
+            this.OutputTextBox1.TabStop = false;
             // 
             // Form1
             // 
@@ -191,12 +212,14 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.ExitButton;
-            this.ClientSize = new System.Drawing.Size(200, 222);
+            this.ClientSize = new System.Drawing.Size(227, 258);
+            this.Controls.Add(this.OutputTextBox1);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.InputIsbnLabel);
             this.Controls.Add(this.SubmittedIsbnTextBox);
             this.Controls.Add(this.ClearFormButton);
-            this.Controls.Add(this.OutputTextBox);
+            this.Controls.Add(this.OutputTextBox2);
             this.Controls.Add(this.InvalidLabel);
             this.Controls.Add(this.ValidLabel);
             this.Controls.Add(this.ExitButton);
@@ -223,11 +246,13 @@
         private System.Windows.Forms.Button ExitButton;
         private System.Windows.Forms.Label ValidLabel;
         private System.Windows.Forms.Label InvalidLabel;
-        private System.Windows.Forms.TextBox OutputTextBox;
+        private System.Windows.Forms.TextBox OutputTextBox2;
         private System.Windows.Forms.Button ClearFormButton;
         private System.Windows.Forms.TextBox SubmittedIsbnTextBox;
         private System.Windows.Forms.Label InputIsbnLabel;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.TextBox OutputTextBox1;
     }
 }
 
