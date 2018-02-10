@@ -201,7 +201,13 @@ namespace CS_HW2_ISBN
 
             if (this.SelectionComboBox.SelectedItem.ToString() == Isbn10LabelString && IsbnArray.Length > 0 && PrefixIsValid)
             {
-                IsbnCheckDigit = 10 - (IsbnArray[0] + (3 * IsbnArray[1]) + IsbnArray[2] + (3 * IsbnArray[3]) +
+                /*IsbnCheckDigit = 11 - ((IsbnArray[0] * 10) + (IsbnArray[1] * 9) + (IsbnArray[2] * 8) + (IsbnArray[3] * 7) +
+                                        (IsbnArray[4] * 6) + (IsbnArray[5] * 5) + (IsbnArray[6] * 4) + (IsbnArray[7] * 3) + 
+                                          (IsbnArray[8] * 2) + (IsbnArray[9] * 1) % 11);*/
+
+
+
+                IsbnCheckDigit =  10 - (IsbnArray[0] + (3 * IsbnArray[1]) + IsbnArray[2] + (3 * IsbnArray[3]) +
                                            IsbnArray[4] + (3 * IsbnArray[5]) + IsbnArray[6] + (3 * IsbnArray[7]) +
                                            IsbnArray[8] + (3 * IsbnArray[9]) + IsbnArray[10] + (3 * IsbnArray[11])) % 10;
 

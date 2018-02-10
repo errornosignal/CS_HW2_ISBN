@@ -133,7 +133,7 @@
             this.InvalidLabel.BackColor = System.Drawing.SystemColors.Control;
             this.InvalidLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.InvalidLabel.ForeColor = System.Drawing.Color.Red;
-            this.InvalidLabel.Location = new System.Drawing.Point(25, 135);
+            this.InvalidLabel.Location = new System.Drawing.Point(24, 136);
             this.InvalidLabel.Name = "InvalidLabel";
             this.InvalidLabel.Size = new System.Drawing.Size(53, 15);
             this.InvalidLabel.TabIndex = 7;
