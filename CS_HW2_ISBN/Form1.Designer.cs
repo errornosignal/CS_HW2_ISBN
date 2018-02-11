@@ -118,26 +118,26 @@
             // 
             this.ValidLabel.AutoSize = true;
             this.ValidLabel.BackColor = System.Drawing.SystemColors.Control;
-            this.ValidLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ValidLabel.ForeColor = System.Drawing.Color.Green;
-            this.ValidLabel.Location = new System.Drawing.Point(35, 136);
+            this.ValidLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ValidLabel.ForeColor = System.Drawing.Color.LimeGreen;
+            this.ValidLabel.Location = new System.Drawing.Point(221, 171);
             this.ValidLabel.Name = "ValidLabel";
-            this.ValidLabel.Size = new System.Drawing.Size(43, 15);
+            this.ValidLabel.Size = new System.Drawing.Size(30, 24);
             this.ValidLabel.TabIndex = 6;
-            this.ValidLabel.Text = "Valid!";
+            this.ValidLabel.Text = "✓";
             this.ValidLabel.Visible = false;
             // 
             // InvalidLabel
             // 
             this.InvalidLabel.AutoSize = true;
             this.InvalidLabel.BackColor = System.Drawing.SystemColors.Control;
-            this.InvalidLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.InvalidLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.InvalidLabel.ForeColor = System.Drawing.Color.Red;
-            this.InvalidLabel.Location = new System.Drawing.Point(24, 136);
+            this.InvalidLabel.Location = new System.Drawing.Point(221, 170);
             this.InvalidLabel.Name = "InvalidLabel";
-            this.InvalidLabel.Size = new System.Drawing.Size(53, 15);
+            this.InvalidLabel.Size = new System.Drawing.Size(21, 24);
             this.InvalidLabel.TabIndex = 7;
-            this.InvalidLabel.Text = "Invalid!";
+            this.InvalidLabel.Text = "x";
             this.InvalidLabel.Visible = false;
             // 
             // OutputTextBox2
@@ -212,7 +212,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.ExitButton;
-            this.ClientSize = new System.Drawing.Size(227, 258);
+            this.ClientSize = new System.Drawing.Size(248, 258);
             this.Controls.Add(this.OutputTextBox1);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.label2);
