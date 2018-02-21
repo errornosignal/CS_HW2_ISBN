@@ -52,7 +52,7 @@ namespace CS_HW2_ISBN
         private void SelectionComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
             this.SubmittedIsbnTextBox.Clear();
-            this.ValidLabel.Visible = false;
+            this.ValidLabel1.Visible = false;
             this.ValidLabel2.Visible = false;
             this.InvalidLabel.Visible = false;
 
@@ -94,53 +94,53 @@ namespace CS_HW2_ISBN
         /// <param name="e"></param>
         private void ValidateIsbnButton_Click(object sender, EventArgs e)
         {
-            const int DashOne = 1;
-            const int DashThree = 3;
-            const int DashFour = 4;
-            const int DashFive = 5;
-            const int DashEight = 8;
-            const int DashEleven = 11;
-            const int DashFifteen = 15;
-            const int Isbn10StringLength = 13;
-            const int Isbn13StringLength = 17;
-            this.ValidLabel.Visible = false;
-            this.InvalidLabel.Visible = false;
-            var IsbnIsValid = false;
-            var IsbnToValidate = "";
+            const int dashAtOne = 1;
+            const int dashAtThree = 3;
+            const int dashAtFour = 4;
+            const int dashAtFive = 5;
+            const int dashAtEight = 8;
+            const int dashAtEleven = 11;
+            const int dashAtFifteen = 15;
+            const int isbn10StringLength = 13;
+            const int isbn13StringLength = 17;
+            var isbnIsValid = false;
+            var isbnToValidate = "";
 
+            this.ValidLabel1.Visible = false;
+            this.InvalidLabel.Visible = false;
             this.OutputTextBox1.Clear();
             this.OutputTextBox2.Clear();
 
             if (this.SelectionComboBox.SelectedItem.ToString() == Isbn10LabelString)
             {
-                IsbnToValidate = StripStringToDigits(this.Isbn10MaskedTextBox.Text);
+                isbnToValidate = StripStringToDigits(this.Isbn10MaskedTextBox.Text);
                 this.SubmittedIsbnTextBox.Text = this.Isbn10MaskedTextBox.Text;
                 this.Isbn10MaskedTextBox.Clear();
                 this.Isbn10MaskedTextBox.Focus();
             }
             else if (this.SelectionComboBox.SelectedItem.ToString() == Isbn13LabelString)
             {
-                IsbnToValidate = StripStringToDigits(this.Isbn13MaskedTextBox.Text);
+                isbnToValidate = StripStringToDigits(this.Isbn13MaskedTextBox.Text);
                 this.SubmittedIsbnTextBox.Text = this.Isbn13MaskedTextBox.Text;
                 this.Isbn13MaskedTextBox.Clear();
                 this.Isbn13MaskedTextBox.Focus();
             }
             else {/*doNothing()*/} //No other possible cases
 
-            IsbnIsValid = ValidateIsbn(IsbnToValidate, out var FinalIsbn);
+            isbnIsValid = ValidateIsbn(isbnToValidate, out var finalIsbn);
 
             if (this.SelectionComboBox.SelectedItem.ToString() == Isbn10LabelString)
             {
                 try
                 {
-                    var TempString1 = FinalIsbn;
-                    TempString1 = TempString1.Insert(DashOne, "-").Insert(DashFour, "-").Insert(DashEleven, "-");
-                    TempString1 = TempString1.Substring(0, Isbn10StringLength);
-                    this.OutputTextBox1.Text = TempString1;
+                    var tempString1 = finalIsbn;
+                    tempString1 = tempString1.Insert(dashAtOne, "-").Insert(dashAtFour, "-").Insert(dashAtEleven, "-");
+                    tempString1 = tempString1.Substring(0, isbn10StringLength);
+                    this.OutputTextBox1.Text = tempString1;
 
-                    if (IsbnIsValid)
+                    if (isbnIsValid)
                     {
-                        this.ValidLabel.Visible = true;
+                        this.ValidLabel1.Visible = true;
                     }
                     else
                     {
@@ -149,28 +149,27 @@ namespace CS_HW2_ISBN
 
                     this.ValidLabel2.Visible = true;
                 }
-                catch
+                catch (Exception)
                 {
-                    SubmittedIsbnTextBox.Clear();
                     this.SubmittedIsbnTextBox.Clear();
-                    this.ValidLabel.Visible = false;
+                    this.SubmittedIsbnTextBox.Clear();
+                    this.ValidLabel1.Visible = false;
                     this.ValidLabel2.Visible = false;
                     this.InvalidLabel.Visible = false;
-                    //DisplayNoDataMessage();
                 }
             }
             else if (this.SelectionComboBox.SelectedItem.ToString() == Isbn13LabelString)
             {
                 try
                 {
-                    var TempString1 = FinalIsbn;
-                    TempString1 = TempString1.Insert(DashThree, "-").Insert(DashFive, "-").Insert(DashEight, "-").Insert(DashFifteen, "-");
-                    TempString1 = TempString1.Substring(0, Isbn13StringLength);
-                    this.OutputTextBox2.Text = TempString1;
+                    var tempString1 = finalIsbn;
+                    tempString1 = tempString1.Insert(dashAtThree, "-").Insert(dashAtFive, "-").Insert(dashAtEight, "-").Insert(dashAtFifteen, "-");
+                    tempString1 = tempString1.Substring(0, isbn13StringLength);
+                    this.OutputTextBox2.Text = tempString1;
 
-                    if (IsbnIsValid)
+                    if (isbnIsValid)
                     {
-                        this.ValidLabel.Visible = true;
+                        this.ValidLabel1.Visible = true;
                     }
                     else
                     {
@@ -178,14 +177,13 @@ namespace CS_HW2_ISBN
                     }
                     this.ValidLabel2.Visible = true;
                 }
-                catch
+                catch (Exception)
                 {
-                    SubmittedIsbnTextBox.Clear();
                     this.SubmittedIsbnTextBox.Clear();
-                    this.ValidLabel.Visible = false;
+                    this.SubmittedIsbnTextBox.Clear();
+                    this.ValidLabel1.Visible = false;
                     this.ValidLabel2.Visible = false;
                     this.InvalidLabel.Visible = false;
-                    //DisplayNoDataMessage();
                 }
             }
             else {/*doNothing()*/} //No other possible cases
@@ -194,167 +192,153 @@ namespace CS_HW2_ISBN
         /// <summary>
         /// Removes dashes from string with regular expression.
         /// </summary>
-        /// <param name="Str"></param>
+        /// <param name="str"></param>
         /// <returns></returns>
-        private string StripStringToDigits(string Str)
+        private static string StripStringToDigits(string str)
         {
-            var StrippedStr = Regex.Replace(Str, @"\D", "");
-            return StrippedStr;
+            var strippedString = Regex.Replace(str, @"\D", "");
+            return strippedString;
         }
 
         /// <summary>
         /// Validates ISBN check digits.
         /// </summary>
-        /// <param name="IsbnToValidate"></param>
-        /// <param name="FinalIsbn"></param>
+        /// <param name="isbnToValidate"></param>
+        /// <param name="finalIsbn"></param>
         /// <returns></returns>
-        private bool ValidateIsbn(string IsbnToValidate, out string FinalIsbn)
+        private bool ValidateIsbn(string isbnToValidate, out string finalIsbn)
         {
-            var IsbnCheckDigit = 0;
-            List<int> IsbnList = new List<int>();
+            var isbnList = new List<int>();
+            var isbnCheckDigit = 0;
+            var isValid = false;
+            finalIsbn = "";
 
-            foreach (char c in IsbnToValidate)
+            foreach (var c in isbnToValidate)
             {
-                IsbnList.Add(int.Parse(c.ToString()));
+                isbnList.Add(int.Parse(c.ToString()));
             }
             
             if (this.SelectionComboBox.SelectedItem.ToString() == Isbn10LabelString)
             {
                 try
                 {
-                    IsbnCheckDigit = ((IsbnList[0] * 1) + (IsbnList[1] * 2) + (IsbnList[2] * 3) + (IsbnList[3] * 4)
-                                      + (IsbnList[4] * 5) + (IsbnList[5] * 6) + (IsbnList[6] * 7) + (IsbnList[7] * 8)
-                                      + (IsbnList[8] * 9)) % 11;
-
-                    if ((IsbnList[9] == IsbnCheckDigit) /*&& (IsbnList.Sum() > 0)*/)
+                    if (isbnList.Sum() == 0 && isbnList.Count > 0)
                     {
-                        FinalIsbn = string.Join("", IsbnList);
-                        return true;
-                    }
-                    else if ((IsbnList[9] != IsbnCheckDigit) && (IsbnList.Sum() > 0))
-                    {
-                        IsbnList[9] = IsbnCheckDigit;
-                        FinalIsbn = string.Join("", IsbnList);
-                        if (FinalIsbn.Substring(9, 2) == "10")
-                        {
-                            FinalIsbn = FinalIsbn.Remove(9, 2).Insert(9, "X");
-                        }
-                        else
-                        {
-                            /*doNothing*/
-                        } //No other cases to handle
-
-                        return false;
-                    }
-                    else if (IsbnList.Count == 9)
-                    {
-                        IsbnList.Add(IsbnCheckDigit);
-                        FinalIsbn = string.Join("", IsbnList.ToArray());
-                        if (FinalIsbn.Substring(9, 2) == "10")
-                        {
-                            FinalIsbn = FinalIsbn.Remove(9, 2).Insert(9, "X");
-                        }
-                        else
-                        {
-                            /*doNothing*/
-                        } //No other cases to handle
-
-                        return false;
+                        DisplayInvalidDataMessage(Isbn10LabelString);
                     }
                     else
+                    {/*doNothing*/} //No other cases to handle
+
+                    isbnCheckDigit = ((isbnList[0] * 1) + (isbnList[1] * 2) + (isbnList[2] * 3) + (isbnList[3] * 4)
+                                      + (isbnList[4] * 5) + (isbnList[5] * 6) + (isbnList[6] * 7) + (isbnList[7] * 8)
+                                      + (isbnList[8] * 9)) % 11;
+
+                    if ((isbnList[9] == isbnCheckDigit) && (isbnList.Sum() > 0))
                     {
-                        FinalIsbn = "";
-                        return false;
+                        finalIsbn = string.Join("", isbnList);
+                        isValid = true;
                     }
+                    else if ((isbnList[9] != isbnCheckDigit) && (isbnList.Sum() > 0))
+                    {
+                        isbnList[9] = isbnCheckDigit;
+                        finalIsbn = string.Join("", isbnList);
+
+                        if (finalIsbn.Length == 11)
+                        {
+                            if (finalIsbn.Substring(9, 2) == "10")
+                            {
+                                finalIsbn = finalIsbn.Remove(9, 2).Insert(9, "X");
+                            }
+                            else
+                            {/*doNothing*/} //No other cases to handle
+                        }
+                        else
+                        {/*doNothing*/} //No other cases to handle
+                    }
+                    else
+                    {/*doNothing*/} //No other cases to handle
                 }
-                catch
+                catch (Exception)
                 {
-                    FinalIsbn = "";
-                    //MessageBox.Show("HIT 1!", "Error",
-                    //MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    //DisplayInvalidDataMessage(Isbn13LabelString);
-                    return false;
+                    DisplayInvalidDataMessage(Isbn13LabelString);
                 }
             }
             else if (this.SelectionComboBox.SelectedItem.ToString() == Isbn13LabelString)
             {
+                var prefixIsValid = isbnToValidate.StartsWith(NineSevenEight) || isbnToValidate.StartsWith(NineSevenNine);
+
+                if (!prefixIsValid)
+                {
+                    DisplayInvalidDataMessage(SelectionComboBox.SelectedItem.ToString());
+                    finalIsbn = "";
+                    return false;
+                }
+                else
+                {/*doNothing*/} //No other cases to handle
+
                 try
                 {
-                    IsbnCheckDigit = 10 - (IsbnList[0] + (3 * IsbnList[1]) + IsbnList[2] + (3 * IsbnList[3]) +
-                                           IsbnList[4] + (3 * IsbnList[5]) + IsbnList[6] + (3 * IsbnList[7]) +
-                                           IsbnList[8] + (3 * IsbnList[9]) + IsbnList[10] + (3 * IsbnList[11])) % 10;
+                    isbnCheckDigit = 10 - (isbnList[0] + (3 * isbnList[1]) + isbnList[2] + (3 * isbnList[3]) +
+                                           isbnList[4] + (3 * isbnList[5]) + isbnList[6] + (3 * isbnList[7]) +
+                                           isbnList[8] + (3 * isbnList[9]) + isbnList[10] + (3 * isbnList[11])) % 10;
 
-                    if ((IsbnList[12] == IsbnCheckDigit) && (IsbnList.Sum() > 0))
+                    if ((isbnList[12] == isbnCheckDigit) && (isbnList.Sum() > 0))
                     {
-                        FinalIsbn = string.Join("", IsbnList);
-                        return true;
+                        finalIsbn = string.Join("", isbnList);
+                        isValid = true;
                     }
-                    else if ((IsbnList[12] != IsbnCheckDigit) && (IsbnList.Sum() > 0))
+                    else if ((isbnList[12] != isbnCheckDigit) && (isbnList.Sum() > 0))
                     {
-                        IsbnList[12] = IsbnCheckDigit;
-                        FinalIsbn = string.Join("", IsbnList);
-                        return false;
+                        isbnList[12] = isbnCheckDigit;
+                        finalIsbn = string.Join("", isbnList);
                     }
                     else
-                    {
-                        FinalIsbn = "";
-                        return false;
-                    }
+                    {/*doNothing*/} //No other cases to handle
                 }
-                catch
+                catch (Exception)
                 {
-                    MessageBox.Show("HIT 2!", "Error",
-                        MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    DisplayInvalidDataMessage(Isbn13LabelString);
                     DisplayInvalidDataMessage(Isbn13LabelString);
                 }
             }
             else
-            {
-                FinalIsbn = "";
-                return false;
-            }
-            FinalIsbn = "";
-                return false;
+            {/*doNothing*/} //No other cases to handle
+            return isValid;
         }
-//END OF FIX ME--------------------------------------------------------------------------------------------------------
 
         /// <summary>
         /// Displays error MessageBox on Invalid data entered.
         /// </summary>
-        /// <param name="IsbnFormat"></param>
-        private void DisplayInvalidDataMessage(string IsbnFormat)
+        /// <param name="isbnFormat"></param>
+        private void DisplayInvalidDataMessage(string isbnFormat)
         {
-            SubmittedIsbnTextBox.Clear();
             this.SubmittedIsbnTextBox.Clear();
-            this.ValidLabel.Visible = false;
+            this.SubmittedIsbnTextBox.Clear();
+            this.ValidLabel1.Visible = false;
             this.ValidLabel2.Visible = false;
             this.InvalidLabel.Visible = false;
-            MessageBox.Show("Input was invalid!\n" +
-                            "1. Verify proper ISBN format:\n" +
-                            "       [ISBN-10/ISBN-13]\n" +
-                            "2. Enter the complete ISBN:\n" +
-                            "       [IBSN-10 = 13 digits, ISBN-13 = 10 digits]\n" +
-                            "3. ISBN-13 must begin with '" + NineSevenEight + "' or '" + NineSevenNine + ".", 
-                "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+            MessageBox.Show("INVALID INPUT!\n\n" +
+                            "Please verify that the following conditions have been met:\n" +
+                            "   -Proper ISBN format selected:\n" +
+                            "\ta. ISBN-10 or ISBN-13.\n" +
+                            "   -Complete ISBN entered:\n" +
+                            "\ta. IBSN-10 is 10 digits in length.\n" +
+                            "\tb. ISBN-13 is 13 digits in length.\n" +
+                            "\t\t1). ISBN-13 begins with \"" + NineSevenEight + "\" or \"" + NineSevenNine + "\".", 
+                        "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
             this.Isbn10MaskedTextBox.Clear();
             this.Isbn13MaskedTextBox.Clear();
 
-            if (IsbnFormat == Isbn10LabelString)
+            if (isbnFormat == Isbn10LabelString)
             {
                 this.Isbn10MaskedTextBox.Focus();
             }
-            else if(IsbnFormat == Isbn13LabelString)
+            else if(isbnFormat == Isbn13LabelString)
             {
                 this.Isbn13MaskedTextBox.Focus();
             }
             else {/*doNothing()*/} //No other possible cases
-        }
-
-        private void DisplayNoDataMessage()
-        {
-            MessageBox.Show("No data has been entered!", "Error",
-                MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
 
         /// <summary>
@@ -364,7 +348,8 @@ namespace CS_HW2_ISBN
         /// <param name="e"></param>
         private void ClearFormButton_Click(object sender, EventArgs e)
         {
-            this.ValidLabel.Visible = false;
+            this.ValidLabel1.Visible = false;
+            this.ValidLabel2.Visible = false;
             this.InvalidLabel.Visible = false;
             this.Isbn10MaskedTextBox.Clear();
             this.Isbn13MaskedTextBox.Clear();
@@ -390,8 +375,8 @@ namespace CS_HW2_ISBN
         /// <param name="e"></param>
         private void Isbn10MaskedTextBox_MouseDown(object sender, MouseEventArgs e)
         {
-            Isbn10MaskedTextBox.Clear();
-            Isbn10MaskedTextBox.Focus();
+            this.Isbn10MaskedTextBox.Clear();
+            this.Isbn10MaskedTextBox.Focus();
         }
 
         /// <summary>
@@ -401,8 +386,8 @@ namespace CS_HW2_ISBN
         /// <param name="e"></param>
         private void Isbn13MaskedTextBox_MouseDown(object sender, MouseEventArgs e)
         {
-            Isbn13MaskedTextBox.Clear();
-            Isbn13MaskedTextBox.Focus();
+            this.Isbn13MaskedTextBox.Clear();
+            this.Isbn13MaskedTextBox.Focus();
         }
 
         /// <summary>
@@ -419,7 +404,6 @@ namespace CS_HW2_ISBN
                 SystemSounds.Beep.Play();
                 e.Handled = true;
                 e.SuppressKeyPress = true;
-                return;
             }
             else {/*doNothing()*/} //No other cases needed
         }
@@ -438,7 +422,6 @@ namespace CS_HW2_ISBN
                 SystemSounds.Beep.Play();
                 e.Handled = true;
                 e.SuppressKeyPress = true;
-                return;
             }
             else {/*doNothing()*/} //No other cases needed
         }

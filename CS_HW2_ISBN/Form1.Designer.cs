@@ -34,7 +34,7 @@
             this.SelectFormatLabel = new System.Windows.Forms.Label();
             this.ValidateIsbnButton = new System.Windows.Forms.Button();
             this.ExitButton = new System.Windows.Forms.Button();
-            this.ValidLabel = new System.Windows.Forms.Label();
+            this.ValidLabel1 = new System.Windows.Forms.Label();
             this.InvalidLabel = new System.Windows.Forms.Label();
             this.OutputTextBox2 = new System.Windows.Forms.TextBox();
             this.ClearFormButton = new System.Windows.Forms.Button();
@@ -53,8 +53,7 @@
             this.Isbn10MaskedTextBox.Mask = "0-00-000000-0";
             this.Isbn10MaskedTextBox.Name = "Isbn10MaskedTextBox";
             this.Isbn10MaskedTextBox.Size = new System.Drawing.Size(100, 20);
-            this.Isbn10MaskedTextBox.TabIndex = 0;
-            this.Isbn10MaskedTextBox.TabStop = false;
+            this.Isbn10MaskedTextBox.TabIndex = 3;
             this.Isbn10MaskedTextBox.Visible = false;
             this.Isbn10MaskedTextBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Isbn10MaskedTextBox_KeyDown);
             this.Isbn10MaskedTextBox.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Isbn10MaskedTextBox_MouseDown);
@@ -66,7 +65,7 @@
             this.Isbn13MaskedTextBox.Mask = "000-0-00-000000-0";
             this.Isbn13MaskedTextBox.Name = "Isbn13MaskedTextBox";
             this.Isbn13MaskedTextBox.Size = new System.Drawing.Size(100, 20);
-            this.Isbn13MaskedTextBox.TabIndex = 0;
+            this.Isbn13MaskedTextBox.TabIndex = 2;
             this.Isbn13MaskedTextBox.Visible = false;
             this.Isbn13MaskedTextBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Isbn13MaskedTextBox_KeyDown);
             this.Isbn13MaskedTextBox.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Isbn13MaskedTextBox_MouseDown);
@@ -98,7 +97,8 @@
             this.ValidateIsbnButton.Location = new System.Drawing.Point(111, 108);
             this.ValidateIsbnButton.Name = "ValidateIsbnButton";
             this.ValidateIsbnButton.Size = new System.Drawing.Size(100, 23);
-            this.ValidateIsbnButton.TabIndex = 2;
+            this.ValidateIsbnButton.TabIndex = 4;
+            this.ValidateIsbnButton.TabStop = false;
             this.ValidateIsbnButton.Text = "Validate ISBN";
             this.ValidateIsbnButton.UseVisualStyleBackColor = true;
             this.ValidateIsbnButton.Click += new System.EventHandler(this.ValidateIsbnButton_Click);
@@ -115,18 +115,18 @@
             this.ExitButton.Visible = false;
             this.ExitButton.Click += new System.EventHandler(this.ExitButton_Click);
             // 
-            // ValidLabel
+            // ValidLabel1
             // 
-            this.ValidLabel.AutoSize = true;
-            this.ValidLabel.BackColor = System.Drawing.SystemColors.Control;
-            this.ValidLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ValidLabel.ForeColor = System.Drawing.Color.LimeGreen;
-            this.ValidLabel.Location = new System.Drawing.Point(208, 142);
-            this.ValidLabel.Name = "ValidLabel";
-            this.ValidLabel.Size = new System.Drawing.Size(30, 24);
-            this.ValidLabel.TabIndex = 6;
-            this.ValidLabel.Text = "✓";
-            this.ValidLabel.Visible = false;
+            this.ValidLabel1.AutoSize = true;
+            this.ValidLabel1.BackColor = System.Drawing.SystemColors.Control;
+            this.ValidLabel1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ValidLabel1.ForeColor = System.Drawing.Color.LimeGreen;
+            this.ValidLabel1.Location = new System.Drawing.Point(208, 145);
+            this.ValidLabel1.Name = "ValidLabel1";
+            this.ValidLabel1.Size = new System.Drawing.Size(30, 24);
+            this.ValidLabel1.TabIndex = 6;
+            this.ValidLabel1.Text = "✓";
+            this.ValidLabel1.Visible = false;
             // 
             // InvalidLabel
             // 
@@ -134,7 +134,7 @@
             this.InvalidLabel.BackColor = System.Drawing.SystemColors.Control;
             this.InvalidLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.InvalidLabel.ForeColor = System.Drawing.Color.Red;
-            this.InvalidLabel.Location = new System.Drawing.Point(208, 142);
+            this.InvalidLabel.Location = new System.Drawing.Point(208, 146);
             this.InvalidLabel.Name = "InvalidLabel";
             this.InvalidLabel.Size = new System.Drawing.Size(21, 24);
             this.InvalidLabel.TabIndex = 7;
@@ -157,7 +157,7 @@
             this.ClearFormButton.Location = new System.Drawing.Point(16, 109);
             this.ClearFormButton.Name = "ClearFormButton";
             this.ClearFormButton.Size = new System.Drawing.Size(75, 21);
-            this.ClearFormButton.TabIndex = 3;
+            this.ClearFormButton.TabIndex = 5;
             this.ClearFormButton.Text = "Clear Form";
             this.ClearFormButton.UseVisualStyleBackColor = true;
             this.ClearFormButton.Click += new System.EventHandler(this.ClearFormButton_Click);
@@ -217,7 +217,7 @@
             this.ValidLabel2.BackColor = System.Drawing.SystemColors.Control;
             this.ValidLabel2.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ValidLabel2.ForeColor = System.Drawing.Color.LimeGreen;
-            this.ValidLabel2.Location = new System.Drawing.Point(208, 168);
+            this.ValidLabel2.Location = new System.Drawing.Point(208, 169);
             this.ValidLabel2.Name = "ValidLabel2";
             this.ValidLabel2.Size = new System.Drawing.Size(30, 24);
             this.ValidLabel2.TabIndex = 14;
@@ -240,7 +240,7 @@
             this.Controls.Add(this.ClearFormButton);
             this.Controls.Add(this.OutputTextBox2);
             this.Controls.Add(this.InvalidLabel);
-            this.Controls.Add(this.ValidLabel);
+            this.Controls.Add(this.ValidLabel1);
             this.Controls.Add(this.ExitButton);
             this.Controls.Add(this.ValidateIsbnButton);
             this.Controls.Add(this.SelectFormatLabel);
@@ -263,7 +263,7 @@
         private System.Windows.Forms.Label SelectFormatLabel;
         private System.Windows.Forms.Button ValidateIsbnButton;
         private System.Windows.Forms.Button ExitButton;
-        private System.Windows.Forms.Label ValidLabel;
+        private System.Windows.Forms.Label ValidLabel1;
         private System.Windows.Forms.Label InvalidLabel;
         private System.Windows.Forms.TextBox OutputTextBox2;
         private System.Windows.Forms.Button ClearFormButton;
