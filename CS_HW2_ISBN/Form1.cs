@@ -1,14 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Diagnostics.Eventing.Reader;
-using System.Drawing;
 using System.Linq;
 using System.Media;
-using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace CS_HW2_ISBN
@@ -62,13 +56,15 @@ namespace CS_HW2_ISBN
             this.ValidLabel2.Visible = false;
             this.InvalidLabel.Visible = false;
 
-
             if (this.SelectionComboBox.SelectedItem.ToString() == Isbn10LabelString)
             {
                 this.Isbn10MaskedTextBox.Visible = true;
                 this.Isbn10MaskedTextBox.Focus();
                 this.Isbn13MaskedTextBox.Visible = false;
                 this.Isbn13MaskedTextBox.Clear();
+                this.Isbn10MaskedTextBox.Clear();
+                this.OutputTextBox1.Clear();
+                this.OutputTextBox2.Clear();
                 this.Isbn10Label.Visible = true;
                 this.OutputTextBox1.Visible = true;
                 this.Isbn13Label.Visible = false;
@@ -80,6 +76,9 @@ namespace CS_HW2_ISBN
                 this.Isbn13MaskedTextBox.Focus();
                 this.Isbn10MaskedTextBox.Visible = false;
                 this.Isbn10MaskedTextBox.Clear();
+                this.Isbn13MaskedTextBox.Clear();
+                this.OutputTextBox1.Clear();
+                this.OutputTextBox2.Clear();
                 this.Isbn13Label.Visible = true;
                 this.OutputTextBox2.Visible = true;
                 this.Isbn10Label.Visible = false;
@@ -88,7 +87,6 @@ namespace CS_HW2_ISBN
             else {/*doNothing()*/} //No other possible cases
         }
 
-//FIX ME---------------------------------------------------------------------------------------------------------------
         /// <summary>
         /// Runs methods for data entry, validation, calculating ISBN check-digits, and setting form state.
         /// </summary>
@@ -105,7 +103,6 @@ namespace CS_HW2_ISBN
             const int DashFifteen = 15;
             const int Isbn10StringLength = 13;
             const int Isbn13StringLength = 17;
-            //const int RemoveMe = 4;
             this.ValidLabel.Visible = false;
             this.InvalidLabel.Visible = false;
             var IsbnIsValid = false;
@@ -140,8 +137,6 @@ namespace CS_HW2_ISBN
                     TempString1 = TempString1.Insert(DashOne, "-").Insert(DashFour, "-").Insert(DashEleven, "-");
                     TempString1 = TempString1.Substring(0, Isbn10StringLength);
                     this.OutputTextBox1.Text = TempString1;
-                    //TempString1 = TempString1.Insert(0, NineSevenEight + "-");
-                    //this.OutputTextBox2.Text = TempString1;
 
                     if (IsbnIsValid)
                     {
@@ -154,7 +149,7 @@ namespace CS_HW2_ISBN
 
                     this.ValidLabel2.Visible = true;
                 }
-                catch (Exception Ex)
+                catch
                 {
                     SubmittedIsbnTextBox.Clear();
                     this.SubmittedIsbnTextBox.Clear();
@@ -172,7 +167,6 @@ namespace CS_HW2_ISBN
                     TempString1 = TempString1.Insert(DashThree, "-").Insert(DashFive, "-").Insert(DashEight, "-").Insert(DashFifteen, "-");
                     TempString1 = TempString1.Substring(0, Isbn13StringLength);
                     this.OutputTextBox2.Text = TempString1;
-                    //this.OutputTextBox1.Text = TempString1.Remove(0, RemoveMe);
 
                     if (IsbnIsValid)
                     {
@@ -184,7 +178,7 @@ namespace CS_HW2_ISBN
                     }
                     this.ValidLabel2.Visible = true;
                 }
-                catch (Exception Ex)
+                catch
                 {
                     SubmittedIsbnTextBox.Clear();
                     this.SubmittedIsbnTextBox.Clear();
@@ -232,7 +226,7 @@ namespace CS_HW2_ISBN
                                       + (IsbnList[4] * 5) + (IsbnList[5] * 6) + (IsbnList[6] * 7) + (IsbnList[7] * 8)
                                       + (IsbnList[8] * 9)) % 11;
 
-                    if ((IsbnList[9] == IsbnCheckDigit) && (IsbnList.Sum() > 0))
+                    if ((IsbnList[9] == IsbnCheckDigit) /*&& (IsbnList.Sum() > 0)*/)
                     {
                         FinalIsbn = string.Join("", IsbnList);
                         return true;
@@ -252,15 +246,34 @@ namespace CS_HW2_ISBN
 
                         return false;
                     }
+                    else if (IsbnList.Count == 9)
+                    {
+                        IsbnList.Add(IsbnCheckDigit);
+                        FinalIsbn = string.Join("", IsbnList.ToArray());
+                        if (FinalIsbn.Substring(9, 2) == "10")
+                        {
+                            FinalIsbn = FinalIsbn.Remove(9, 2).Insert(9, "X");
+                        }
+                        else
+                        {
+                            /*doNothing*/
+                        } //No other cases to handle
+
+                        return false;
+                    }
                     else
                     {
                         FinalIsbn = "";
                         return false;
                     }
                 }
-                catch (Exception Ex)
+                catch
                 {
-                    DisplayInvalidDataMessage(Isbn13LabelString);
+                    FinalIsbn = "";
+                    //MessageBox.Show("HIT 1!", "Error",
+                    //MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    //DisplayInvalidDataMessage(Isbn13LabelString);
+                    return false;
                 }
             }
             else if (this.SelectionComboBox.SelectedItem.ToString() == Isbn13LabelString)
@@ -288,8 +301,11 @@ namespace CS_HW2_ISBN
                         return false;
                     }
                 }
-                catch (Exception Ex)
+                catch
                 {
+                    MessageBox.Show("HIT 2!", "Error",
+                        MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    DisplayInvalidDataMessage(Isbn13LabelString);
                     DisplayInvalidDataMessage(Isbn13LabelString);
                 }
             }
